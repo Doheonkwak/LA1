@@ -12,7 +12,7 @@ List<T>::List(T inputList[], int size) : size(size) {
 	if (size < 0) {
 		throw out_of_range("The Size of List can not be negative");
 	}
-	capacity = size;//sizeof(inputList)/sizeof(T);
+	capacity = size;
 	Arr = new T[capacity];
 	for (int i = 0; i < size; i++) {
 		Arr[i] = inputList[i];
@@ -39,7 +39,7 @@ List<T>::List(T v) : size(1), capacity(1) {
 
 template<typename T>
 List<T>::List(const List& obj) : size(obj.size), capacity(obj.capacity) {
-	Arr = new T[capacity];
+	Arr = new T[obj.capacity];
 	for (int i = 0; i < size; i++) {
 		Arr[i] = obj.Arr[i];
 	}
@@ -283,64 +283,71 @@ void List<T>::remove(T v, bool all) {
 	}
 }
 
+template<typename T>
+void List<T>::quickSort_DSC(T list[], int first, int last) {
+	if (last > first) {
+		int pivotIndex = partition_DSC(list, first, last);
+		quickSort_DSC(list, first, pivotIndex - 1);
+		quickSort_DSC(list, pivotIndex + 1, last);
+	}
+}
+template<typename T>
+int List<T>::partition_DSC(T list[], int low, int high) {
+	T pivot = list[low];
+
+	int j = low;
+	for (int i = low + 1; i <= high; i++) {
+		if (list[i] > pivot) {
+			j++;
+			T temp = list[i];
+			list[i] = list[j];
+			list[j] = temp;
+		}
+	}
+	list[low] = list[j];
+	list[j] = pivot;
+	return j;
+}
 
 template<typename T>
-void List<T>::sort(bool asc) {
-	if (size <= 1) {
-		return;
+void List<T>::quickSort_ASC(T list[], int first, int last) {
+	if (last > first) {
+		int pivotIndex = partition_ASC(list, first, last);
+		quickSort_ASC(list, first, pivotIndex - 1);
+		quickSort_ASC(list, pivotIndex + 1, last);
 	}
+}
+template<typename T>
+int List<T>::partition_ASC(T list[], int low, int high) {
+	T pivot = list[low];
 
-	T tTemp;
-
-	if (asc == true) {
-
-		while (true) {
-
-			bool sortFinish = true;
-
-			for (int i = 0; i < size - 1; i++) {
-				if (Arr[i] > Arr[i + 1]) {
-					tTemp = Arr[i];
-					Arr[i] = Arr[i + 1];
-					Arr[i + 1] = tTemp;
-
-					sortFinish = false;
-				}
-			}
-
-			if (sortFinish == true) {
-				break;
-			}
+	int j = low;
+	for (int i = low + 1; i <= high; i++) {
+		if (list[i] < pivot) {
+			j++;
+			T temp = list[i];
+			list[i] = list[j];
+			list[j] = temp;
 		}
+	}
+	list[low] = list[j];
+	list[j] = pivot;
+	return j;
+}
+template<typename T>
+void List<T>::sort(bool asc) {
+	if (asc == true) {
+		quickSort_ASC(Arr, 0, size - 1);
 	}
 	else {
-
-		while (true) {
-
-			bool sortFinish = true;
-
-			for (int i = 0; i < size - 1; i++) {
-				if (Arr[i] < Arr[i + 1]) {
-					tTemp = Arr[i];
-					Arr[i] = Arr[i + 1];
-					Arr[i + 1] = tTemp;
-
-					sortFinish = false;
-				}
-			}
-
-			if (sortFinish == true) {
-				break;
-			}
-		}
+		quickSort_DSC(Arr, 0, size -1);
 	}
 }
 
-
 template<typename T>
-int List<T>::search(T v) {
+int List<T>::search(T key) {
 	for (int i = 0; i < size; i++) {
-		if (Arr[i] == v) {
+		if (Arr[i] == key) {
 			return i;
 		}
 	}
