@@ -44,7 +44,7 @@ void test() {
 	cout << "Size of subList: " << subList.getSize() << endl;
 	cout << "Capacity of subList: " << subList.getCapacity() << endl;
 	cout << "Accessing the 3rd Index of arrList with []: " << arrList[2] << endl;
-	cout << "Accessing the 3rd Index of arrList with get()" << arrList.getValue(2) << endl;
+	cout << "Accessing the 3rd Index of arrList with get(): " << arrList.getValue(2) << endl;
 	cout << "Search number'4' from arrList: Index " << arrList.search(4) << endl;
 	arrList.append(1);
 	cout << "Appending single value to arrList: " << arrList << endl;
@@ -53,7 +53,7 @@ void test() {
 	multipleOfVLsit.insert(10, 2);
 	cout << "Insert a single value to 3rd Index of multipleOfVLsit: " << multipleOfVLsit << endl;
 	multipleOfVLsit.insert(iArr2, 4, 2);
-	cout << "Insert a Arrey to 3rd Index of multipleOfVLsi: t" << multipleOfVLsit << endl;
+	cout << "Insert a Arrey to 3rd Index of multipleOfVList: " << multipleOfVLsit << endl;
 	multipleOfVLsit.remove(4, false);
 	cout << "Remove only first of 4 in multipleOfVList: " << multipleOfVLsit << endl;
 	multipleOfVLsit.remove(4, true);
@@ -69,7 +69,7 @@ void test() {
 	SortedList<double> inputSortedList;
 	cout << "Enter capacity and size then, put item in the SortedList " << endl;
 	cin >> inputSortedList;
-	cout << "inputSortedList: " << inputSortedList << endl;
+	cout <<"inputSortedList: " << inputSortedList << endl;
 	SortedList<double> arrSortedList(dArr1, 3);
 	cout << "arrSortedList: " << arrSortedList << endl;
 	SortedList<double> multipleOfVSortedList(3.14, 3);
@@ -96,7 +96,7 @@ void test() {
 	cout << "Capacity of copySortedList1: " << copySortedList1.getCapacity() << endl;
 	cout << "Acessing 2nd index of copySortedList1 with get() " << copySortedList1.getValue(2) << endl;
 	cout << "Acessing 2nd index of copySortedList1 with [] " << copySortedList1[2] << endl;
-	cout << "Search number '3.4' from copySortedList1: Index" << copySortedList1.search(3.4) << endl;
+	cout << "Search number '3.4' from copySortedList1: Index" << copySortedList1.search(3.4)<<endl;
 	copySortedList1.append(3.14);
 	cout << "Appending single value to copyList1: " << copySortedList1 << endl;
 	copySortedList1.append(dArr2, 2);
@@ -105,18 +105,20 @@ void test() {
 	cout << "Insert a single value to 5th index of copyList1: " << copySortedList1 << endl;
 	copySortedList1.insert(dArr2, 2, 0);
 	cout << "Insert an arrey to first index of copyList1: " << copySortedList1 << endl;
-	multipleOfVSortedList.remove(3.14, false);
-	cout << "remove only first '3.14' in multipleOfVSortedList: " << multipleOfVSortedList << endl;
-	multipleOfVSortedList.remove(3.14, true);
-	cout << "remove all of 3.14 in multipleOfVSortedList: " << multipleOfVSortedList << endl;
+	copySortedList1.remove(3.5, false);
+	cout << "remove only first '3.5' in copyList1: " << copySortedList1 << endl;
+	copySortedList1.remove(10.2, true);
+	cout << "remove all of 10.2 in copyList1: " << copySortedList1 << endl;
+	copySortedList1.setOrder(false);
+	cout << "Changing order of copyList1: " << copySortedList1 << endl;
 
 }
 int main() {
-	try {
+	try {	
 		test();
 		testException();
 	}
-	catch (out_of_range& err) {
+	catch (out_of_range& err){
 		cout << err.what() << endl;
 	}
 	return 0;
@@ -134,7 +136,7 @@ class List {
 public:
 	List(); o
 	List(T inputList[], int size); // has to be positive size, throw exception for negative size or use noexcept if funtion doesnt throw exception o
-	List(T v, int n); // constructor that creates an object including “n” occurrences of value “v" o
+	List(T v, int n); // constructor that creates an object including â€œnâ€ occurrences of value â€œv" o
 
 	virtual ~List(); o
 
