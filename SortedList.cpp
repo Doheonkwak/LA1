@@ -15,7 +15,7 @@ SortedList<T>::SortedList(T inputList[], int size) : List<T>(inputList, size), o
 }
 
 template<typename T>
-SortedList<T>::SortedList(T v, int n) : List<T>(v, n), order(true) {
+SortedList<T>::SortedList(T v, int n) : List<T>(v, n), order(true){
 	sort(order);
 }
 
@@ -216,52 +216,10 @@ int SortedList<T>::search(T v) {
 
 template<typename T>
 void SortedList<T>::sort(bool asc) {
-	if (this->size <= 1) {
-		return;
-	}
-
-	T tTemp;
-
 	if (asc == true) {
-
-		while (true) {
-
-			bool sortFinish = true;
-
-			for (int i = 0; i < this->size - 1; i++) {
-				if (this->Arr[i] > this->Arr[i + 1]) {
-					tTemp = this->Arr[i];
-					this->Arr[i] = this->Arr[i + 1];
-					this->Arr[i + 1] = tTemp;
-
-					sortFinish = false;
-				}
-			}
-
-			if (sortFinish == true) {
-				break;
-			}
-		}
+		List<T>::quickSort_ASC(this->Arr, 0, this->size - 1);
 	}
 	else {
-
-		while (true) {
-
-			bool sortFinish = true;
-
-			for (int i = 0; i < this->size - 1; i++) {
-				if (this->Arr[i] < this->Arr[i + 1]) {
-					tTemp = this->Arr[i];
-					this->Arr[i] = this->Arr[i + 1];
-					this->Arr[i + 1] = tTemp;
-
-					sortFinish = false;
-				}
-			}
-
-			if (sortFinish == true) {
-				break;
-			}
-		}
+		List<T>::quickSort_DSC(this->Arr, 0, this->size -1);
 	}
 }
