@@ -14,9 +14,9 @@ public:
 	virtual ~List();
 
 	List(const List& obj);//copy constructor has to be const ref &  always....
-	List& operator=(const List& obj);//self assignment check!,assignment operator need to return a list (ref &)
-	List(List&& tempobj);//move constructor
-	List& operator=(List&& tempobj);//move assignment operator
+	List& operator=(const List& obj);//self assignment cheak!,assignment operator need to return a list (ref &)
+	List(List&& tempobj);//move con
+	List& operator=(List&& tempobj);//moe assignment operator
 
 	virtual int getSize()const final;
 	virtual int getCapacity()const final;
@@ -27,7 +27,11 @@ public:
 	virtual void insert(T v, int index);
 	virtual void insert(T v[], int size, int index);
 	void remove(T v, bool all = false);
-	virtual void sort(bool asc = true);//true = ascending order, false = descending order
+	virtual void sort(bool asc = true);//true= ascending order, false내림차순
+	void quickSort_ASC(T list[], int first, int last);
+	void quickSort_DSC(T list[], int first, int last);
+	int partition_ASC(T list[], int low, int high);
+	int partition_DSC(T list[], int low, int high);
 	virtual int search(T v);
 
 	List<T> operator+(T v);
